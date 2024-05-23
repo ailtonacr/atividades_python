@@ -10,20 +10,19 @@ Soma de Números Pares
 
 
 def get_limit_value(message):
-    while True:
-        try:
-            return int(input(message))
-        except:
-            print("Digite um valor inteiro")
+    try:
+        return int(input(message))
+    except:
+        print("Digite um valor inteiro")
+        return get_limit_value(message)
 
 
-def get_par_values(par_values, limit_value):
-    for i in range(1, limit_value+1):
+def receive_even_values(par_values, limit_value):
+    values = par_values
+    for i in range(1, limit_value + 1):
         if i % 2 == 0:
-            par_values.append(i)
-        else:
-            continue
-    return get_limit_value
+            values.append(i)
+    return values
 
 
 def sum_values_pairs(par_values):
@@ -31,20 +30,18 @@ def sum_values_pairs(par_values):
 
 
 def return_result(limit_value, par_values, sum_total_pairs):
-    print(f"A soma total de numeros pares presentes de 1 a {limit_value} é {sum_total_pairs}")
+    print(f"A soma total de numeros pares presentes de 1 a {limit_value} é: {sum_total_pairs}")
     print(f"A quantidade de numeros pares de 1 até {limit_value} é: {len(par_values)}")
 
 
 def main():
     par_values = []
     limit_value = get_limit_value("Somar pares até:")
-    get_par_values(par_values, limit_value)
+    par_values = receive_even_values(par_values, limit_value)
     sum_total_pairs = sum_values_pairs(par_values)
     return_result(limit_value, par_values, sum_total_pairs)
 
 
 if __name__ == '__main__':
     main()
-
-
 
