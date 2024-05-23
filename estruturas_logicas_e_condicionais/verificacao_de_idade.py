@@ -13,12 +13,11 @@ import sys
 
 
 def get_year_of_birth(message):
-    i = 0
-    while i < 3:
+    for i in range(3):
         try:
             year = int(input(message))
             if len(str(year)) != 4:
-                print('Formato incorreto, digite os 4 digitos do ano do seu nascimento.')
+                print('O ano de nascimento deve ter 4 digitos.')
                 i += 1
                 continue
             return year
