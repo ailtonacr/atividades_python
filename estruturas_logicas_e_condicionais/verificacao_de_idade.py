@@ -9,18 +9,23 @@ contato com o assunto ainda, pedi ajuda na formatação datetime.now().year pra 
 essa ideia veio por causa daquele today kkk)
 """
 from datetime import datetime
+import sys
 
 
 def get_year_of_birth(message):
-    try:
-        year = int(input(message))
-        if len(str(year)) != 4:
-            print('Formato incorreto, digite os 4 digitos do ano do seu nascimento.')
-            return get_year_of_birth(message)
-        return year
-    except:
-        print('Data de nascimento inválida.')
-        return get_year_of_birth(message)
+    i = 0
+    while i < 3:
+        try:
+            year = int(input(message))
+            if len(str(year)) != 4:
+                print('Formato incorreto, digite os 4 digitos do ano do seu nascimento.')
+                i += 1
+                continue
+            return year
+        except:
+            print('Data de nascimento inválida.')
+        i += 1
+    sys.exit('Limite de tentaivas excedido')
 
 
 def calculate_age(year_of_birth):
