@@ -8,8 +8,8 @@ Verificação de Idade
 contato com o assunto ainda, pedi ajuda na formatação datetime.now().year pra pegar apenas o ano (Obrigado Thalita,
 essa ideia veio por causa daquele today kkk)
 """
-from datetime import datetime
-import sys
+from datetime import date
+from sys import exit
 
 
 def get_year_of_birth(message):
@@ -18,17 +18,15 @@ def get_year_of_birth(message):
             year = int(input(message))
             if len(str(year)) != 4:
                 print('O ano de nascimento deve ter 4 digitos.')
-                i += 1
                 continue
             return year
         except:
             print('Data de nascimento inválida.')
-        i += 1
-    sys.exit('Limite de tentaivas excedido')
+    exit('Limite de tentaivas excedido')
 
 
 def calculate_age(year_of_birth):
-    current_year = datetime.now().year
+    current_year = date.today().year
     return current_year - year_of_birth
 
 
