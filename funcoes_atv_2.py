@@ -13,13 +13,14 @@ uso de *args #esse aqui eu vou fazer em uma separada, não encontrei um uso inte
 
 from sys import exit
 
-shopping_list = {}
+shopping_cart = {}
 
 
 def select_actions():
     """
-    Solicita ao usuário que selecione uma ação.
-    Se o usuário inserir uma opção inválida, ele terá três tentativas antes de o programa ser encerrado.
+    Solicita ao usuário que selecione uma ação a ser executada.
+    O usuário tem até três tentativas para inserir um valor válido.
+    Se todas as tentativas forem inválidas, o programa será encerrado.
     """
     for i in range(3):
         try:
@@ -35,7 +36,6 @@ def select_actions():
             return action
         except ValueError:
             print("Digite uma opção válida")
-            return select_actions()
     exit("Limite de tentativas atingido.")
 
 
@@ -46,26 +46,27 @@ def add_item(quantity="1"):
     Se o usuário inserir uma quantidade inválida, ele terá três tentativas antes de retornar à função principal.
     O usuário tem a opção de adicionar mais produtos à lista.
     """
-    products = input("Digite o produto que deseja adicionar: ")
+    product = input("Digite o produto que deseja adicionar: ")
     for i in range(3):
+        quantity_inputed = input("digite a quantidade do produto, ou tecle enter para adicionar 1: ")
         try:
-            quantity_inputed = input("digite a quantidade do produto, ou tecle enter para adicionar 1: ")
-            if quantity_inputed == "":
-                pass
-            elif quantity_inputed.isnumeric() is True:
-                quantity = quantity_inputed
-            else:
-                raise ValueError
-            break
+            match quantity_inputed:
+                case "" | "1":
+                    break
+                case "0":
+                    raise ValueError
+                case _:
+                    quantity = int(quantity_inputed)
+                    break
         except ValueError:
             print("Digite um valor válido.")
             if i == 2:
                 print("Número de tentativas excedido.")
-                return main()
-    shopping_list.update({products: quantity})
-    if input("Deseja adicionar mais produtos? (s/n): ") == "s":
-        return add_item()
-    return main()
+                main()
+    shopping_cart.update({product: quantity})
+    if input("Deseja adicionar mais produtos? ").lower() in ["s", "ss", "sim"]:
+        add_item()
+    main()
 
 
 def remove_item():
@@ -76,19 +77,19 @@ def remove_item():
     """
     for i in range(3):
         try:
-            product_to_remove = input("Digite o produto que deseja remover: ")
-            if product_to_remove not in shopping_list.keys():
+            product = input("Digite o produto que deseja remover: ")
+            if product not in shopping_cart:
                 raise ValueError
-            shopping_list.pop(product_to_remove)
-            print(f"Produto {product_to_remove} removido com sucesso.")
-            if input("Deseja remover mais produtos? (s/n): ") == "s":
-                return remove_item()
-            return main()
+            shopping_cart.pop(product)
+            print(f"Produto {product} removido com sucesso.")
+            if input("Deseja remover mais produtos? ").lower() in ["s", "ss", "sim"]:
+                remove_item()
+            main()
         except ValueError:
-            if input("Produto não encontrado. Tentar novamente? (s/n): ") in ["n", "não"]:
-                return main()
+            if input("Produto não encontrado. Tentar novamente? ").lower() in ["n", "não"]:
+                main()
     print("numero de tentativas excedido.")
-    return main()
+    main()
 
 
 def edit_quantity():
@@ -97,27 +98,25 @@ def edit_quantity():
     Se o produto não estiver na lista, o usuário terá a opção de tentar novamente.
     Se o usuário inserir uma quantidade inválida, ele terá três tentativas antes de retornar à função principal.
     """
-    product_to_edit = input("Digite o produto que deseja editar a quantidade: ")
-    if product_to_edit not in shopping_list:
+    product = input("Digite o produto que deseja editar a quantidade: ")
+    if product not in shopping_cart:
         print("Produto não encontrado.")
-        if input("Deseja tentar novamente? (s/n): ").lower() in ["s", "sim"]:
-            return edit_quantity()
-        return main()
+        if input("Deseja tentar novamente? ").lower() in ["s", "ss", "sim"]:
+            edit_quantity()
+        main()
 
     for i in range(3):
         try:
-            new_quantity = int(input("Digite a nova quantidade: "))
-            shopping_list[product_to_edit] = new_quantity
-            print(f"Quantidade de {product_to_edit} atualizada para {new_quantity}")
-            if input("Deseja editar mais produtos? (s/n): ").lower() == "s":
-                return edit_quantity()
-            return main()
+            quantity = int(input("Digite a nova quantidade: "))
+            shopping_cart[product] = quantity
+            print(f"Quantidade de {product} atualizada para {quantity}")
+            if input("Deseja editar mais produtos? ").lower() in ["s", "ss", "sim"]:
+                edit_quantity()
+            main()
         except ValueError:
             print("Digite um valor inteiro.")
-            if i == 2:
-                print("Número de tentativas excedido.")
-                return main()
-    return main()
+    print("Número de tentativas excedido.")
+    main()
 
 
 def view_shopping_list(**kwargs):
@@ -127,16 +126,16 @@ def view_shopping_list(**kwargs):
     """
     if not kwargs:
         print("Lista de compras vazia.")
-        return main()
+        main()
     print("Aqui está sua lista de compras:\n")
     for product, quantity in kwargs.items():
         print(f"{quantity}x {product}")
-    return main()
+    main()
 
 
 def main():
     """
-    Função principal que chama as outras funções com base na ação selecionada pelo usuário.
+    Chama a função select_actions() e processa o valor retornado para definir a ação a ser executada.
     """
     match select_actions():
         case "1":
@@ -146,8 +145,8 @@ def main():
         case "3":
             edit_quantity()
         case "4":
-            view_shopping_list(**shopping_list)
-            return main()
+            view_shopping_list(**shopping_cart)
+            main()
         case "5":
             exit("Programa encerrado.")
 
