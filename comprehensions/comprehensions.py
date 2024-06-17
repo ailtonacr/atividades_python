@@ -3,6 +3,7 @@ crie uma função que receba vários números em uma única string separados por
 OBS: Utilize list comprehension para facilitar a manipulação da string de entrada.
 """
 
+
 def get_numbers():
     """
     Recebe os números que o usuário deseja somar, separados por espaço
@@ -15,15 +16,6 @@ def get_numbers():
     except ValueError:
         print("Digite apenas números.")
         get_numbers()
-
-
-def calculate_result(numbers_for_sum):
-    """
-    Calcula a soma dos números fornecidos
-    :param numbers_for_sum: fornece uma lista com os numeros inseridos pelo usuário
-    :return: retorna a soma dos números fornecidos
-    """
-    return sum(numbers_for_sum)
 
 
 def view_result_and_numbers(total_sum, numbers_for_sum):
@@ -42,9 +34,10 @@ def main():
     chama as funções necessárias para a execução do programa em suas respectivas ordens
     """
     numbers_for_sum = get_numbers()
-    total_sum = calculate_result(numbers_for_sum)
+    total_sum = sum(numbers_for_sum)
     view_result_and_numbers(total_sum, numbers_for_sum)
 
 
 if __name__ == "__main__":
     main()
+

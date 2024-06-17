@@ -12,7 +12,7 @@ def get_numbers():
     :return: retorna uma lista com os números que o usuário deseja somar
     """
     numbers_for_sum = []
-    print("Digite um número por vez. Tecle enter para sair e ver o resultado da soma dos números fornecidos.")
+    print('Digite um número por vez. Tecle "enter" sem digitar um número ver a soma dos números fornecidos.')
     while True:
         try:
             number = input("Digite um número: ")
@@ -22,15 +22,6 @@ def get_numbers():
         except ValueError:
             print("Digite um número válido.")
     return numbers_for_sum
-
-
-def calculate_result(*args):
-    """
-    Calcula a soma dos números fornecidos
-    :param args: fornece os numeros inseridos pelo usuário como argumentos posicionais
-    :return: retorna a soma dos números fornecidos
-    """
-    return sum(args)
 
 
 def convert_to_int_or_float(total_sum):
@@ -59,12 +50,10 @@ def search_by_indexes(*args):
     :return: em caso de erro, retorna para a função search_by_indexes
     ao final da execução, pergunta ao usuário se ele deseja consultar outro indice ou encerrar do programa
     """
-    while True:
+    for i in range(len(args)):
         index = int(input("Digite o índice do número que deseja consultar: "))
         try:
-            if index < 0:
-                raise ValueError
-            elif index >= len(args):
+            if index < 0 or index >= len(args):
                 raise ValueError
             elif args[index].is_integer():
                 number = int(args[index])
@@ -73,9 +62,11 @@ def search_by_indexes(*args):
             print(f"{number} é o número no índice {index}.")
         except ValueError:
             print("Digite um índice válido.")
-            search_by_indexes(*args)
-        if input("Digite enter para encerrar o programa, ou qualquer tecla para consultar outro indice. ") == "":
-            exit("Programa encerrado.")
+        if i == len(args) - 1:
+            break
+        elif input('Digite "enter" para encerrar o programa, ou qualquer tecla para consultar outro indice. ') == "":
+            break
+    exit("Programa encerrado.")
 
 
 def main():
@@ -84,7 +75,7 @@ def main():
     chama as funções necessárias para a execução do programa em suas respectivas ordens
     """
     numbers = get_numbers()
-    total_sum = calculate_result(*numbers)
+    total_sum = sum(numbers)
     result = convert_to_int_or_float(total_sum)
     view_result_and_numbers(result)
     search_by_indexes(*numbers)
