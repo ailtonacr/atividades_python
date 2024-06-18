@@ -1,5 +1,5 @@
 """
-crie uma função que receba vários números em uma única string separados por espaço e retorne a soma desses números.
+crie uma função que receba vários números em uma única string separados por espaço e imprime a soma desses números.
 OBS: Utilize list comprehension para facilitar a manipulação da string de entrada.
 """
 
