@@ -3,17 +3,34 @@ from functools import reduce
 
 def get_numbers():
     """
-    Recebe os números que o usuário deseja elevar ao quadrado, separados por espaço
+    Recebe os números que o usuário deseja elevar ao quadrado, separados por espaço.
     os numeros do tipo float podem ser escritos com vírgula ou ponto
-    verifica se o número é inteiro ou float e retorna uma lista com os números que o usuário deseja elevar ao quadrado
     :return: retorna uma lista com os números que o usuário deseja elevar ao quadrado
     """
     try:
-        numbers = [float(number.strip().replace(",", ".")) for number in input("Digite os números que deseja elevar ao quadrado (separe-os por espaço): ").split()]
-        return [int(number) if number.is_integer() else number for number in numbers]
+        numbers = [
+            float(number.strip().replace(",", "."))
+            for number in input("Digite os números que deseja elevar ao quadrado (separe-os por espaço): ").split()
+        ]
+        return verify_if_number_is_integer(numbers)
     except ValueError:
         print("Digite apenas números.")
         get_numbers()
+
+
+def verify_if_number_is_integer(numbers):
+    """
+    Verifica se o número é inteiro e o reescreve de forma correta.
+    :param numbers: fornece os números para serem verificados
+    :return: retorna uma lista com os numeros verificados
+    """
+    numbers_verified = []
+    for number in numbers:
+        if number.is_integer():
+            numbers_verified.append(int(number))
+        else:
+            numbers_verified.append(number)
+    return numbers_verified
 
 
 def elevate_to_square(numbers_to_square):
@@ -46,15 +63,16 @@ def sum_even_numbers(even_numbers):
 
 def view_result(numbers_to_square, squared_numbers, total_even_numbers):
     """
-    Imprime os números fornecidos
-    Imprime os números fornecidos elevados ao quadrado
-    Imprime a soma dos números pares encontrados em squared_numbers
+    Imprime:
+    - os números fornecidos
+    - os números fornecidos elevados ao quadrado
+    - a soma dos números pares encontrados em squared_numbers
     :param numbers_to_square: fornece uma lista com os números que o usuário deseja elevar ao quadrado
     :param squared_numbers: fornece uma lista com os números fornecidos elevados ao quadrado
     :param total_even_numbers: fornece a soma dos números pares encontrados em squared_numbers
     """
-    print(f"Os numeros fornecidos elevados ao quadrado são: {squared_numbers} ")
     print(f"Os números fornecidos foram: {numbers_to_square}")
+    print(f"Os numeros fornecidos elevados ao quadrado são: {squared_numbers} ")
     print(f"A soma dos números pares fornecidos elevados ao quadrado é: {total_even_numbers}")
 
 

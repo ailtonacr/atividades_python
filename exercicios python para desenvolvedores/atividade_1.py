@@ -40,6 +40,33 @@ from functools import reduce
 from random import randint
 
 
+def get_ramdom_numbers(initial_value=0, final_value=100):
+    """
+    Gera números aleatórios de acordo com os parametros fornecidos.
+    Por padrão são: initial_value=0 e final_value=100
+    :param initial_value: Fornece o valor inicial para geração de números aleatórios
+    :param final_value: Fornece o valor final para geração de números aleatórios
+    :return: Retornq um número inteiro aleatório contido no intervalo entre initial_value e final_value.
+    """
+    return randint(initial_value, final_value)
+
+
+def dictionary_processing(entered_values):
+    """
+    Processa o dicionário fornecido por "entered_values" da seguinte forma:
+    Soma todos os valores do dicionário e armazena em "sumed_values"
+    Verifica a média entre o maior valor e o menor valor e armazena em "average_of_values"
+    Verifica a variação entre o maior valor e o menor valor e armazena em "variation_of_values"
+    :param entered_values: fornece um dicionário com 10 valores inteiros aleatórios entre 0 e 100
+    :return:Retorna um dicionário com o resultado do processamento de "entered_values"
+    """
+    sumed_values = sum(entered_values.values())
+    average_of_values = round(sumed_values / len(entered_values), 2)
+    variation_of_values = max(entered_values.values()) - min(entered_values.values())
+    return {'sumed_values': sumed_values, 'average_of_values': average_of_values,
+            'variation_of_values': variation_of_values}
+
+
 def convert_celsius_to_fahrenheit(celsius):
     """
     Faz a conversão de celsius para fahrenheit
@@ -80,58 +107,12 @@ def verify_prime_numbers(numbers_for_veryfy_prime):
     return prime_numbers
 
 
-def get_ramdom_numbers(initial_value=0, final_value=100):
-    """
-    Gera números aleatórios de acordo com os parametros fornecidos.
-    Por padrão são: initial_value=0 e final_value=100
-    :param initial_value: Fornece o valor inicial para geração de números aleatórios
-    :param final_value: Fornece o valor final para geração de números aleatórios
-    :return: Retornq um número inteiro aleatório contido no intervalo entre initial_value e final_value.
-    """
-    return randint(initial_value, final_value)
-
-
-def items_concatenation(previous_result, next_item):
-    """
-    :return: Rotorna a concatenação dos dois parâmetros fornecidos (previous_result e next_item)
-    """
-    return previous_result + next_item
-
-
-def items_ordenation(item, in_order=True):
-    """
-    Recebe um item a ser ordenado, De acordo com o parâmetro "in_order"
-    Se o parâmetro "in_order" for false, retorna o item na ordem reversa.
-    :param item: Fornece o item que deseja ordenar
-    :param in_order: Fornece pra função a ordem desejada do item.
-    """
-    if in_order is False:
-        return item[::-1]
-    return item
-
-
 def items_in_unic_plan(items_group):
     """
     Agrupa toodos items de "items_group" em uma única lista e or retorma de forma ordenada.
     :param items_group: Fornece um grupo de itens (tuplas ou listas)
     """
     return sorted(reduce(items_concatenation, items_group))
-
-
-def dictionary_processing(entered_values):
-    """
-    Processa o dicionário fornecido por "entered_values" da seguinte forma:
-    Soma todos os valores do dicionário e armazena em "sumed_values"
-    Verifica a média entre o maior valor e o menor valor e armazena em "average_of_values"
-    Verifica a variação entre o maior valor e o menor valor e armazena em "variation_of_values"
-    :param entered_values: fornece um dicionário com 10 valores inteiros aleatórios entre 0 e 100
-    :return:Retorna um dicionário com o resultado do processamento de "entered_values"
-    """
-    sumed_values = sum(entered_values.values())
-    average_of_values = round(sumed_values / len(entered_values), 2)
-    variation_of_values = max(entered_values.values()) - min(entered_values.values())
-    return {'sumed_values': sumed_values, 'average_of_values': average_of_values,
-            'variation_of_values': variation_of_values}
 
 
 def reverse_caracters_of_phrase(phrase):
@@ -161,6 +142,25 @@ def random_order_list(tuple_listing):
     tuple_listing_ordened = sorted(reduce(items_concatenation, tuple_listing))
     in_order = bool(get_ramdom_numbers(final_value=1))
     return items_ordenation(tuple_listing_ordened, in_order=in_order)
+
+
+def items_concatenation(previous_result, next_item):
+    """
+    :return: Rotorna a concatenação dos dois parâmetros fornecidos (previous_result e next_item)
+    """
+    return previous_result + next_item
+
+
+def items_ordenation(item, in_order=True):
+    """
+    Recebe um item a ser ordenado, De acordo com o parâmetro "in_order"
+    Se o parâmetro "in_order" for false, retorna o item na ordem reversa.
+    :param item: Fornece o item que deseja ordenar
+    :param in_order: Fornece pra função a ordem desejada do item.
+    """
+    if in_order is False:
+        return item[::-1]
+    return item
 
 
 def view_results(celsius, fahrenheit, C_to_F, F_to_C, pryme_numbers, items_group, result_items_in_unic_plan, entered_values,
@@ -198,8 +198,8 @@ def main():
     reverse_phrase = reverse_caracters_of_phrase(phrase)
     list_tuple_in_random_order = random_order_list(tuple_listing)
 
-    view_results(celsius, fahrenheit, C_to_F, F_to_C, pryme_numbers, items_group, result_items_in_unic_plan, entered_values,
-                 trated_dictionary, phrase, reverse_phrase, tuple_listing, list_tuple_in_random_order)
+    view_results(celsius, fahrenheit, C_to_F, F_to_C, pryme_numbers, items_group, result_items_in_unic_plan,
+                 entered_values, trated_dictionary, phrase, reverse_phrase, tuple_listing, list_tuple_in_random_order)
 
 
 if __name__ == "__main__":
