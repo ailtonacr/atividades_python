@@ -58,7 +58,7 @@ def dictionary_processing(entered_values):
     Verifica a média entre o maior valor e o menor valor e armazena em "average_of_values"
     Verifica a variação entre o maior valor e o menor valor e armazena em "variation_of_values"
     :param entered_values: fornece um dicionário com 10 valores inteiros aleatórios entre 0 e 100
-    :return:Retorna um dicionário com o resultado do processamento de "entered_values"
+    :return: Retorna um dicionário com o resultado do processamento de "entered_values"
     """
     sumed_values = sum(entered_values.values())
     average_of_values = round(sumed_values / len(entered_values), 2)
@@ -109,7 +109,7 @@ def verify_prime_numbers(numbers_for_veryfy_prime):
 
 def items_in_unic_plan(items_group):
     """
-    Agrupa toodos items de "items_group" em uma única lista e or retorma de forma ordenada.
+    Agrupa todos items de "items_group" em uma única lista e or retorma de forma ordenada.
     :param items_group: Fornece um grupo de itens (tuplas ou listas)
     """
     return sorted(reduce(items_concatenation, items_group))

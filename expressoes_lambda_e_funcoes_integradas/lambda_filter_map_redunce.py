@@ -8,29 +8,23 @@ def get_numbers():
     :return: retorna uma lista com os números que o usuário deseja elevar ao quadrado
     """
     try:
-        numbers = [
+        numbers_to_square = [
             float(number.strip().replace(",", "."))
             for number in input("Digite os números que deseja elevar ao quadrado (separe-os por espaço): ").split()
         ]
-        return verify_if_number_is_integer(numbers)
+        return verify_if_number_is_integer(numbers_to_square)
     except ValueError:
         print("Digite apenas números.")
         get_numbers()
 
 
-def verify_if_number_is_integer(numbers):
+def verify_if_number_is_integer(numbers_to_square):
     """
-    Verifica se o número é inteiro e o reescreve de forma correta.
-    :param numbers: fornece os números para serem verificados
-    :return: retorna uma lista com os numeros verificados
+    :param numbers_to_square: fornece os números para serem verificados
+    :return: Verifica se o número é inteiro e o reescreve de forma correta. e 
+    retorna uma lista com os números verificados
     """
-    numbers_verified = []
-    for number in numbers:
-        if number.is_integer():
-            numbers_verified.append(int(number))
-        else:
-            numbers_verified.append(number)
-    return numbers_verified
+    return [int(number) if number.is_integer() else number for number in numbers_to_square]
 
 
 def elevate_to_square(numbers_to_square):
