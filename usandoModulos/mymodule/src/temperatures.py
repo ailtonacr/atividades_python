@@ -1,4 +1,4 @@
-def ctof(celsius):
+def c_to_f(celsius):
     """
     Faz a conversão de celsius para fahrenheit
     :param celsius: Fornece a temperatura em celsius a ser convertida em fahrenheit
@@ -8,7 +8,7 @@ def ctof(celsius):
     return round(fahrenheit, 1)
 
 
-def ftoc(fahrenheit):
+def f_to_c(fahrenheit):
     """
     Faz a conversão de fahrenheit para celsius
     :param fahrenheit: Fornece a temperatura em fahrenheit a ser convertida em celsius

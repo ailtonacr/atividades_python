@@ -2,7 +2,7 @@ from random import randint
 from functools import reduce
 
 
-def random_order(item_listing):
+def random_order(tuple_listing):
     """
     Recebe a lista de tuplas fornecida por "tuple_list", concatena todos os itens contidos nela
     e os armazena de forma ordenada em "tuple_listing_ordened".
@@ -10,26 +10,26 @@ def random_order(item_listing):
     a lista "tuple_listing_ordened" vai ser retornada em ordem crescente ou decrescente.
     :param tuple_listing: fornece uma lista de 4 tuplas contendo uma quantidade aleatória (limitado a 10 números)
      de números aleatórios de 0 a 100 em cada uma delas.
-    :return: Retorna uma lista com os items de "tuple_list_ordened" na ordem fornecida por "in_order"
+    :return: Retorna uma lista com os itens de "tuple_list_ordened" na ordem fornecida por "in_order"
     """
-    tuple_listing_ordened = sorted(reduce(concat, item_listing))
-    return order(tuple_listing_ordened, in_order=tf())
+    tuple_listing_ordened = sorted(reduce(concat, tuple_listing))
+    return order(tuple_listing_ordened, in_order=true_or_false())
 
 
 def concat(previous_result, next_item):
     """
-    :return: Rotorna a concatenação dos dois parâmetros fornecidos (previous_result e next_item)
+    :return: Retorna a concatenação dos dois parâmetros fornecidos (previous_result e next_item)
     """
     return previous_result + next_item
 
 
-def gen(initial=0, final=100):
+def generate_numbers(initial=0, final=100):
     """
     Gera números aleatórios de acordo com os parametros fornecidos.
     Por padrão são: initial_value=0 e final_value=100
     :param initial: Fornece o valor inicial para geração de números aleatórios
     :param final: Fornece o valor final para geração de números aleatórios
-    :return: Retornq um número inteiro aleatório contido no intervalo entre initial_value e final_value.
+    :return: Retorna um número inteiro aleatório contido no intervalo entre initial_value e final_value.
     """
     return randint(initial, final)
 
@@ -46,19 +46,19 @@ def order(item, in_order=True):
     return item
 
 
-def ordene(itens_group):
+def sort_items(items_group):
     """
-    Agrupa toodos items de "items_group" em uma única lista e or retorma de forma ordenada.
-    :param itens_group: Fornece um grupo de itens (tuplas ou listas)
+    Agrupa todos itens de "items_group" em uma única lista e or retorma de forma ordenada.
+    :param items_group: Fornece um grupo de itens (tuplas ou listas)
     """
-    return sorted(reduce(concat, itens_group))
+    return sorted(reduce(concat, items_group))
 
 
-def tf():
+def true_or_false():
     """
     :return: retorna um valor booleano aleatório
     """
-    return bool(gen(0, 1))
+    return bool(generate_numbers(0, 1))
 
 
 def reverse(item):
