@@ -42,6 +42,10 @@ def phare_in_reverse_plan():
 
 
 def tuple_in_random_order():
+    """
+    Gera uma lista de 4 tuplas com até 4 valores aleatórios. Passa essa lista para a função random_order,que concatena
+    os valores das tuplas e os retorna em uma lista ordenada de forma aleatória (cresecente ou decrescente)
+    """
     tuple_listing = [tuple(generate_numbers() for _ in range(generate_numbers(1, 10))) for _ in range(4)]
     view_result(f"A lista de tuplas fornecisda foi: {tuple_listing}.\n"
                 f"Aqui esta uma lista com os valores devidamente concatenados e ordenados:\n"

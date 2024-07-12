@@ -82,7 +82,7 @@ def process_dict(item):
     Verifica a média entre o maior valor e o menor valor e armazena em "average_of_values"
     Verifica a variação entre o maior valor e o menor valor e armazena em "variation_of_values"
     :param item: fornece um dicionário com 10 valores inteiros aleatórios entre 0 e 100
-    :return:Retorna um dicionário com o resultado do processamento de "entered_values"
+    :return: Retorna um dicionário com o resultado do processamento de "entered_values"
     """
     sumed_values = sum(item.values())
     average_of_values = round(sumed_values / len(item), 2)
