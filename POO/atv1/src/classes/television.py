@@ -7,35 +7,27 @@ def number_generator(initial_value=0, final_value=100):
 
 class Television:
     def __init__(self):
-        self.__status = False
-        self.__volume = number_generator()
-        self.__chanel = number_generator()
-
-    @property
-    def status(self):
-        return self.__status
-
-    @status.setter
-    def status(self, status):
-        self.__status = status
+        self.status = False
+        self._volume = number_generator()
+        self._chanel = number_generator()
 
     @property
     def volume(self):
-        return self.__volume
+        return self._volume
 
     @volume.setter
     def volume(self, volume):
         if 0 <= volume <= 100:
-            self.__volume = volume
+            self._volume = volume
 
     @property
     def chanel(self):
-        return self.__chanel
+        return self._chanel
 
     @chanel.setter
     def chanel(self, chanel):
         if chanel > 0:
-            self.__chanel = chanel
+            self._chanel = chanel
 
     def on(self):
         self.status = True
@@ -48,31 +40,31 @@ class Television:
     def upper_volume(self):
         if self.volume < 100:
             self.volume += 1
-            print(f'Volume aumentado para: {self.volume}')
+            print(f'Volume: {self.volume}.')
 
     def lower_volume(self):
         if self.volume > 0:
             self.volume -= 1
-            print(f'Volume diminuído para: {self.volume}')
+            print(f'Volume: {self.volume}.')
 
     def upper_chanel(self):
         self.chanel += 1
-        print(f'Canal mudou para: {self.chanel}')
+        print(f'Canal: {self.chanel}')
 
     def lower_chanel(self):
         if self.chanel > 1:
             self.chanel -= 1
-            print(f'Canal mudou para: {self.chanel}')
+            print(f'Canal: {self.chanel}')
 
-    def __set_chanel(self, chanel):
+    def _set_chanel(self, chanel):
         if chanel > 0:
             self.chanel = chanel
-            print(f'Canal mudou para: {self.chanel}')
+            print(f'Canal: {self.chanel}')
 
     def change_channel(self):
         try:
             chanel = int(input('Digite o canal que deseja assistir: '))
-            self.__set_chanel(chanel)
+            self._set_chanel(chanel)
         except ValueError:
             print('Canal inválido!')
 

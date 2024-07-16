@@ -38,12 +38,12 @@ if __name__ == '__main__':
     print("Agenda completa:")
     schedule.show_contact_book()
 
-    search_name: str = "bruno"
+    search_name: str = "Bruno"
     index: int = schedule.search_contact(search_name)
     print(f"\nResultado da busca por '{search_name}':")
     schedule.print_contact_by_index(index)
 
-    schedule.remove_contact(bruno)
+    schedule.remove_contact("Bruno")
     print("\nAgenda após remover Bruno:")
     schedule.show_contact_book()
 
