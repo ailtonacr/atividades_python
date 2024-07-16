@@ -29,7 +29,7 @@ class Person:
     def email(self, email):
         self.__email = email
 
-    def print_person(self):
+    def show_person_data(self):
         print(f'Nome: {self.name}')
         print(f'Data de nascimento: {self.birth}')
         print(f'Email: {self.email}')

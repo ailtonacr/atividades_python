@@ -1,16 +1,15 @@
 from random import randint
 
 
+def number_generator(initial_value=0, final_value=100):
+    return randint(initial_value, final_value)
+
+
 class Television:
-
-    @staticmethod
-    def generator(initial_value=0, final_value=100):
-        return randint(initial_value, final_value)
-
     def __init__(self):
         self.__status = False
-        self.__volume = self.generator()
-        self.__chanel = self.generator(initial_value=0)
+        self.__volume = number_generator()
+        self.__chanel = number_generator()
 
     @property
     def status(self):
@@ -78,7 +77,7 @@ class Television:
             print('Canal inválido!')
 
 
-class Control:
+class RemoteControl:
     def __init__(self, television):
         self.television = television
 

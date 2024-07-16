@@ -15,7 +15,7 @@ class Contact:
         return f'"Nome": {self.name}, "Telefone": {self.phone}'
 
 
-class Schedule:
+class ContactBook:
 
     def __init__(self):
         self.__contacts = []
@@ -33,12 +33,12 @@ class Schedule:
                 return i
         return -1
 
-    def print_schedule(self):
+    def show_contact_book(self):
         for contact in self.__contacts:
             print(contact)
 
-    def print_contact_index(self, index):
-        if 0 <= index < len(self.__contacts):  # testar em outros casos
+    def print_contact_by_index(self, index):
+        if 0 <= index < len(self.__contacts):
             print(self.__contacts[index])
         else:
-            print("Indice invalido")
+            print("Índice inválido!")
