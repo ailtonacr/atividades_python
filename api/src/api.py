@@ -11,35 +11,41 @@ CORS(app)
 
 @app.route('/add', methods=['POST'])
 def add():
-    """recebe um nome e o adiciona à lista de convidados"""
+    """Recebe um nome e o adiciona à lista de convidados"""
     data = request.get_json()
     name = data.get('name')
-    result = add_name(name)
-    return jsonify(result)
+    if add_name(name):
+        return jsonify({"message": f"{name} adicionado(a) à lista com sucesso"})
+    return jsonify({"message": f"{name} já está na lista"})
 
 
 @app.route('/remove', methods=['DELETE'])
 def remove():
-    """recebe um nome, verifica se está na lista e o remove"""
+    """Recebe um nome, verifica se está na lista e o remove"""
     data = request.get_json()
     person = data.get('name')
-    result = remove_name(person)
-    return jsonify(result)
+    if remove_name(person):
+        return jsonify({"message": f"{person} removido(a) da lista!"})
+    return jsonify({"message": f"{person} não está na lista!"})
 
 
 @app.route('/list', methods=['GET'])
 def show():
-    """mostra a lista de convidados"""
-    return jsonify(show_guests())
+    """Mostra a lista de convidados"""
+    guests = show_guests()
+    if guests is None:
+        return jsonify({"message": "Lista vazia"})
+    return jsonify(guests)
 
 
 @app.route('/search', methods=['GET'])
 def search():
-    """recebe um nome e verifica se está na lista de convidados"""
+    """Recebe um nome e verifica se ele está na lista de convidados"""
     data = request.get_json()
     name = data.get('name')
-    result = search_name(name)
-    return jsonify(result)
+    if search_name(name):
+        return jsonify({"message": f"{name} está na lista"})
+    return jsonify({"message": f"{name} não está na lista!"})
 
 
 if __name__ == '__main__':
