@@ -14,19 +14,23 @@ def add():
     """Recebe um nome e o adiciona à lista de convidados"""
     data = request.get_json()
     name = data.get('name')
-    if add_name(name):
+    try:
+        add_name(name)
         return jsonify({"message": f"{name} adicionado(a) à lista com sucesso"})
-    return jsonify({"message": f"{name} já está na lista"})
+    except ValueError:
+        return jsonify({"message": f"{name} já está na lista"})
 
 
 @app.route('/remove', methods=['DELETE'])
 def remove():
     """Recebe um nome, verifica se está na lista e o remove"""
     data = request.get_json()
-    person = data.get('name')
-    if remove_name(person):
-        return jsonify({"message": f"{person} removido(a) da lista!"})
-    return jsonify({"message": f"{person} não está na lista!"})
+    name = data.get('name')
+    try:
+        remove_name(name)
+        return jsonify({"message": f"{name} removido(a) da lista!"})
+    except ValueError:
+        return jsonify({"message": f"{name} não está na lista!"})
 
 
 @app.route('/list', methods=['GET'])

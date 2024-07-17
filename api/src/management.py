@@ -7,9 +7,8 @@ def add_name(name):
     :param name: Fornece um nome em formato de string para adicionar à lista de convidados.
     """
     if name in guests.values():
-        return False
+        raise ValueError
     guests[f'convidado {len(guests) + 1}'] = name
-    return True
 
 
 def show_guests():
@@ -26,13 +25,13 @@ def remove_name(name):
     """
     Remove um nome da lista de convidados.
     :param name: Fornece um nome para remover da lista de convidados.
-    :return: Retorna True se o nome foi removido, False caso contrário.
     """
+    if name not in guests.values():
+        raise ValueError
     for key, value in guests.items():
         if value == name:
             del guests[key]
-            return True
-    return False
+            break
 
 
 def search_name(name):
