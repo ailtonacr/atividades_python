@@ -1,16 +1,7 @@
-"""
-Fiz essa atividade com o intuito de fixar o aprendizado e ver na prática o funcionamento de uma API.
-A API fuciona manipulando uma lista de convidados salva em um dicionário.
-As ações dela são:
-    - Adicionar convidado.
-    - Remover convidado.
-    - Listar convidados.
-    - Buscar convidado na lista.
-"""
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_pydantic_spec import FlaskPydanticSpec
 from flask_cors import CORS
-from src import *
+from management import add_name, show_guests, remove_name, search_name
 
 app = Flask(__name__)
 spec = FlaskPydanticSpec('Ailton', title='API lista de convidados')
@@ -20,31 +11,35 @@ CORS(app)
 
 @app.route('/add', methods=['POST'])
 def add():
+    """recebe um nome e o adiciona à lista de convidados"""
     data = request.get_json()
     name = data.get('name')
     result = add_name(name)
-    return result
+    return jsonify(result)
 
 
 @app.route('/remove', methods=['DELETE'])
 def remove():
+    """recebe um nome, verifica se está na lista e o remove"""
     data = request.get_json()
     person = data.get('name')
     result = remove_name(person)
-    return result
+    return jsonify(result)
 
 
 @app.route('/list', methods=['GET'])
 def show():
-    return show_guest()
+    """mostra a lista de convidados"""
+    return jsonify(show_guests())
 
 
 @app.route('/search', methods=['GET'])
 def search():
+    """recebe um nome e verifica se está na lista de convidados"""
     data = request.get_json()
     name = data.get('name')
     result = search_name(name)
-    return result
+    return jsonify(result)
 
 
 if __name__ == '__main__':
