@@ -16,11 +16,10 @@ def add():
     name = data.get('name')
     try:
         add_name(name)
-        message = f'"{name}" adicionado(a) à lista com sucesso'
     except Exception as e:
-        message = e
+        return jsonify({"message": str(e)})
 
-    return jsonify({"message": f"{message}"})
+    return jsonify({"message": f'{name} adicionado(a) à lista com sucesso'})
 
 
 @app.route('/remove', methods=['DELETE'])
@@ -30,11 +29,10 @@ def remove():
     name = data.get('name')
     try:
         remove_name(name)
-        message = f'"{name}" removido(a) da lista!'
     except Exception as e:
-        message = e
+        return jsonify({"message": str(e)})
 
-    return jsonify({"message": f"{message}"})
+    return jsonify({"message": f'{name} removido(a) da lista!'})
 
 
 @app.route('/list', methods=['GET'])
@@ -52,8 +50,8 @@ def search():
     data = request.get_json()
     name = data.get('name')
     if search_name(name):
-        return jsonify({"message": f'"{name}" está na lista'})
-    return jsonify({"message": f'"{name}" não está na lista!'})
+        return jsonify({"message": f'{name} está na lista'})
+    return jsonify({"message": f'{name} não está na lista!'})
 
 
 if __name__ == '__main__':

@@ -7,7 +7,7 @@ def add_name(name):
     :param name: Fornece um nome em formato de string para adicionar à lista de convidados.
     """
     if name in guests.values():
-        raise Exception(f'"{name}" já está na lista')
+        raise Exception(f'{name} já está na lista')
     guests[f'convidado {len(guests) + 1}'] = name
 
 
@@ -27,7 +27,7 @@ def remove_name(name):
     :param name: Fornece um nome para remover da lista de convidados.
     """
     if name not in guests.values():
-        raise Exception(f'"{name}" não está na lista!')
+        raise Exception(f'{name} não está na lista!')
     for key, value in guests.items():
         if value == name:
             del guests[key]
