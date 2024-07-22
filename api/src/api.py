@@ -16,9 +16,11 @@ def add():
     name = data.get('name')
     try:
         add_name(name)
-        return jsonify({"message": f"{name} adicionado(a) à lista com sucesso"})
-    except ValueError:
-        return jsonify({"message": f"{name} já está na lista"})
+        message = f'"{name}" adicionado(a) à lista com sucesso'
+    except Exception as e:
+        message = e
+
+    return jsonify({"message": f"{message}"})
 
 
 @app.route('/remove', methods=['DELETE'])
@@ -28,9 +30,11 @@ def remove():
     name = data.get('name')
     try:
         remove_name(name)
-        return jsonify({"message": f"{name} removido(a) da lista!"})
-    except ValueError:
-        return jsonify({"message": f"{name} não está na lista!"})
+        message = f'"{name}" removido(a) da lista!'
+    except Exception as e:
+        message = e
+
+    return jsonify({"message": f"{message}"})
 
 
 @app.route('/list', methods=['GET'])
@@ -48,8 +52,8 @@ def search():
     data = request.get_json()
     name = data.get('name')
     if search_name(name):
-        return jsonify({"message": f"{name} está na lista"})
-    return jsonify({"message": f"{name} não está na lista!"})
+        return jsonify({"message": f'"{name}" está na lista'})
+    return jsonify({"message": f'"{name}" não está na lista!'})
 
 
 if __name__ == '__main__':
